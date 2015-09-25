@@ -9,12 +9,14 @@ import org.json.JSONObject;
 
 public class Interaction {
 	
+	private BingBoost boost;
 	private float precision;
 	private String query;
 	private int k;
 	private Result[] results;
 	
-	public Interaction(float precision, String query) {
+	public Interaction(float precision, String query) throws FileNotFoundException, IOException {
+		this.boost = new BingBoost();
 		this.precision = precision;
 		this.query = query;
 		this.k = 10;
@@ -62,13 +64,12 @@ public class Interaction {
 		do {
 			// Run bingboost to modify query, should receive current query, descriptions and feedback arrays.
 			queryAndCollectFeedback();
-			BingBoost boost = new BingBoost(query, results);
-			query = boost.updatedQueryForFeedback();
+			query = boost.updatedQueryForFeedback(query, results);
 		} while (currentPrecision() < precision && currentPrecision() > 0);
 		System.out.println(exitMessage());
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException, IOException {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Enter query:");
 		String query = in.nextLine();

@@ -91,12 +91,58 @@ public class BingBoost {
 		
 		// Print out the frequencies for testing purposes
 		System.out.println("RELEVANT TERM FREQUENCIES");
-		for (String s : matches.keySet())
-			System.out.println(s + " : " + matches.get(s));
+		printFrequencies(matches);
 		
 		System.out.println("IRRELEVANT TERM FREQUENCIES");
-		for (String s : misses.keySet())
-			System.out.println(s + " : " + misses.get(s));
+		printFrequencies(misses);
+	}
+	
+	private void addTermFrequencies(Map<String, Float> dest, Map<String, Float> src, float mult) {
+		for (String s : src.keySet()) {
+			float val = src.get(s) * mult;
+			System.out.println("Value: " + val);
+			if (dest.get(s) != null)
+				dest.put(s, dest.get(s) + val);
+			else
+				dest.put(s, val);
+		}
+	}
+	
+	private Map<String, Float> subtractMaps() {
+		Map<String, Float> diff_map = new HashMap<String, Float>();
+		
+		// Add frequencies from matches
+		addTermFrequencies(diff_map, matches, 1);
+		
+		// Subtract frequencies from misses
+		addTermFrequencies(diff_map, misses, -1);
+		
+		return diff_map;
+	}
+	
+	/*
+	 * Helper for testing purposes
+	 */
+	private void printFrequencies(Map<String, Float> map) {
+		for (String s : map.keySet())
+			System.out.println(s + " : " + map.get(s));
+	}
+	
+	/*
+	 * Determine which word should be added to the query.
+	 */
+	private String addWordToQuery(String query, Map<String, Float> diffMap) {
+		float highestFrequency = -1;
+		String word = "";
+		
+		for (String s : diffMap.keySet()) {
+			if (!query.contains(s) && diffMap.get(s) > highestFrequency) {
+				highestFrequency = diffMap.get(s);
+				word = s;
+			}
+		}
+		
+		return word;
 	}
 	
 	/*
@@ -110,11 +156,19 @@ public class BingBoost {
 		n_relevant_terms = n_irrelevant_terms = 0;
 		matches = new HashMap<String, Float>();
 		misses = new HashMap<String, Float>();
-		this.origQuery = query;
+		this.origQuery = query.toLowerCase();
 		this.results = results;
 		
 		// Process the results
 		createNormalizedMaps();
+		Map<String, Float> diffMap = subtractMaps();
+		
+		// For debugging purposes
+		System.out.println("Printing adjusted frequencies");
+		printFrequencies(diffMap);
+		
+		String addWord = addWordToQuery(query, diffMap);
+		System.out.println("Recommended word to add to query: " + addWord);
 		
 		return "";
 	}

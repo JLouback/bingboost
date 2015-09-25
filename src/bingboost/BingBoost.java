@@ -134,7 +134,7 @@ public class BingBoost {
 	/*
 	 * Suggest word to be added to the query.
 	 */
-	private String queryUpdateSuggestion(String query, Map<String, Float> diffMap) {
+	private String addWordToQuery(String query, Map<String, Float> diffMap) {
 		float highestFrequency = -1;
 		String word = "";
 		
@@ -196,7 +196,7 @@ public class BingBoost {
 		//System.out.println("Printing adjusted frequencies");
 		//printFrequencies(diffMap);
 		
-		String addWord = queryUpdateSuggestion(query, diffMap);
+		String addWord = addWordToQuery(query, diffMap);
 		query = updateQuery(query, addWord);
 		
 		System.out.println("Recommended word to add to query: " + addWord);

@@ -132,9 +132,9 @@ public class BingBoost {
 	}
 	
 	/*
-	 * Determine which word should be added to the query.
+	 * Suggest word to be added to the query.
 	 */
-	private String addWordToQuery(String query, Map<String, Float> diffMap) {
+	private String queryUpdateSuggestion(String query, Map<String, Float> diffMap) {
 		float highestFrequency = -1;
 		String word = "";
 		
@@ -146,6 +146,32 @@ public class BingBoost {
 		}
 		
 		return word;
+	}
+	
+	/*
+	 * Add suggested word to query according to most frequent order.
+	 * Count occurrences of suggested word appearing before and after query in description, check majority vote.
+	 * By default, concatenate word to end of query. Very crude, no semantic parsing.
+	 */
+	private String updateQuery(String query, String word) {
+		int before = 0;
+		int after = 0;
+		String[] wordOrder;
+		for (Result result : results) {
+			if (result.relevant == 0)
+				continue;
+			// Note both if clauses are necessary as query may not exist in description.
+			if (result.description.indexOf(word) < result.description.indexOf(query)) 
+				before++;
+			if (result.description.indexOf(word) > result.description.indexOf(query))
+				after++;
+		}
+		//For debugging, look back at printed results marked as relevant, see if it matches.
+		//System.out.println("Before count " + before);
+		//System.out.println("After count " + after);
+		
+		String updated = (before > after) ? word + " " + query : query + " " + word;
+		return updated;
 	}
 	
 	/*
@@ -170,9 +196,8 @@ public class BingBoost {
 		//System.out.println("Printing adjusted frequencies");
 		//printFrequencies(diffMap);
 		
-		String addWord = addWordToQuery(query, diffMap);
-		query = query.concat(" ");
-	    query = query.concat(addWord);
+		String addWord = queryUpdateSuggestion(query, diffMap);
+		query = updateQuery(query, addWord);
 		
 		System.out.println("Recommended word to add to query: " + addWord);
 		System.out.println("Updated query: " + query);

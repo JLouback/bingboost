@@ -36,7 +36,7 @@ public class Interaction {
 		if (current == 0) {
 			return "Search engine has failed. Boooo.";
 		}
-		return "Search engine reached precision level. Yay.";
+		return "Search engine reached desired precision level. Yay.";
 	}
 	
 	public void queryAndCollectFeedback() {
@@ -58,6 +58,9 @@ public class Interaction {
 		} catch (IOException | JSONException e) {
 			e.printStackTrace();
 		}
+		String message = "Iteration complete with achieved precision of %s.";
+		message = String.format(message, currentPrecision());
+		System.out.println(message);
 	}
 	
 	public void runBingboost() {

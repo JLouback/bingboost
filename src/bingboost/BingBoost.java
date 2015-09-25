@@ -4,8 +4,11 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class BingBoost {
 	// Initial parameters
@@ -13,7 +16,7 @@ public class BingBoost {
 	Result[] results;
 	int n_relevant_terms;
 	int n_irrelevant_terms;
-	Map<String, Boolean> stopwords;
+	Set<String> stopwords;
 	
 	// Normalized frequency for terms
 	Map<String, Float> matches;
@@ -26,19 +29,19 @@ public class BingBoost {
 	/*
 	 * Create a map of the stopwords to quickly prune documents
 	 */
-	private Map<String, Boolean> readStopwords() throws FileNotFoundException, IOException {
-		Map<String, Boolean> map = new HashMap<String, Boolean>();
+	private Set<String> readStopwords() throws FileNotFoundException, IOException {
+		Set<String> set = new HashSet<String>();
 		
-		try (BufferedReader br = new BufferedReader(new FileReader("bingboost/stopwords.txt"))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(BingBoost.class.getResourceAsStream("stopwords.txt")))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		    	if (line.length() > 0 && line.charAt(0) != '#')
-		    		map.put(line, true);
+		    		set.add(line);
 		    }
 		    
 		}
 		
-		return map;
+		return set;
 	}
 	
 	/*
@@ -51,7 +54,7 @@ public class BingBoost {
 
 		// Build up map with absolute counts
 		for (String s : r.description.split("\\W+")) {
-			if (stopwords.containsKey(s))
+			if (stopwords.contains(s))
 				continue;
 			
 			// Update total number of relevant or irrelevant words
@@ -90,17 +93,17 @@ public class BingBoost {
 		}
 		
 		// Print out the frequencies for testing purposes
-		System.out.println("RELEVANT TERM FREQUENCIES");
+		/*System.out.println("RELEVANT TERM FREQUENCIES");
 		printFrequencies(matches);
 		
 		System.out.println("IRRELEVANT TERM FREQUENCIES");
-		printFrequencies(misses);
+		printFrequencies(misses);*/
 	}
 	
 	private void addTermFrequencies(Map<String, Float> dest, Map<String, Float> src, float mult) {
 		for (String s : src.keySet()) {
 			float val = src.get(s) * mult;
-			System.out.println("Value: " + val);
+			//System.out.println("Value: " + val);
 			if (dest.get(s) != null)
 				dest.put(s, dest.get(s) + val);
 			else
@@ -164,13 +167,18 @@ public class BingBoost {
 		Map<String, Float> diffMap = subtractMaps();
 		
 		// For debugging purposes
-		System.out.println("Printing adjusted frequencies");
-		printFrequencies(diffMap);
+		//System.out.println("Printing adjusted frequencies");
+		//printFrequencies(diffMap);
 		
 		String addWord = addWordToQuery(query, diffMap);
-		System.out.println("Recommended word to add to query: " + addWord);
+		query = query.concat(" ");
+	    query = query.concat(addWord);
 		
-		return "";
+		System.out.println("Recommended word to add to query: " + addWord);
+		System.out.println("Updated query: " + query);
+		
+		//This was causing a crazy loop
+		return query;
 	}
 
 }

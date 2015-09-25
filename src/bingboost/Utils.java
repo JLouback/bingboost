@@ -18,7 +18,7 @@ public class Utils {
         String bingUrlPattern = "https://api.datamarket.azure.com/Bing/Search/Web?Query=%%27%s%%27&$format=JSON";
         String bingUrl = String.format(bingUrlPattern, query);
 
-      	String accountKey = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+      	String accountKey = "";
       	byte[] accountKeyBytes = Base64.encodeBase64((accountKey + ":" + accountKey).getBytes());
       	String accountKeyEnc = new String(accountKeyBytes);
 

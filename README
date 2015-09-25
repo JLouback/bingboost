@@ -1,0 +1,18 @@
+So the idea is the following:
+
+1. User enters query and precision to Interaction.
+
+2. Interaction uses Utils to get results from Bing.
+
+3. Interaction displays results to user, receives and stores feedback.
+
+4. Interaction calls Bingboost (will contain algo) sending the result descriptions, feedback and query.
+
+5. Bingboost returns modified query.
+
+6. Go to 2 and repeat if current precision < desired precision or equal to 0.
+
+Thinking about not modifying original query, we may want a "step back" function if the modified query results in
+lower precision.
+
+Went with your idea of a vector instead of separating relevant and non-relevant. 

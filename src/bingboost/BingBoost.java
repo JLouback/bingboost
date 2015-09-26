@@ -2,7 +2,6 @@ package bingboost;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -11,6 +10,10 @@ import java.util.Map;
 import java.util.Set;
 
 public class BingBoost {
+	// How much value we place on words in the title and description
+	final int title_weight = 3;
+	final int desc_weight = 1;
+	
 	// Initial parameters
 	String origQuery;
 	Result[] results;
@@ -44,6 +47,24 @@ public class BingBoost {
 		return set;
 	}
 	
+	private void mapTermCounts(Map<String, Float> map, String[] words, int relevant, float pts) {
+		for (String s : words) {
+			if (stopwords.contains(s))
+				continue;
+			
+			// Update total number of relevant or irrelevant words
+			if (relevant > 0) 
+				n_relevant_terms += pts; 
+			else 
+				n_irrelevant_terms += pts;
+			
+			if (map.get(s) != null)
+				map.put(s, map.get(s) + pts);
+			else
+				map.put(s, pts);
+		}
+	}
+	
 	/*
 	 * Add the terms in the result to the correct map (matches/misses) based on
 	 * whether the Result is relevant or not. Keep track of the number of terms going
@@ -53,21 +74,8 @@ public class BingBoost {
 		Map<String, Float> map = (r.relevant > 0) ? matches : misses;
 
 		// Build up map with absolute counts
-		for (String s : r.description.split("\\W+")) {
-			if (stopwords.contains(s))
-				continue;
-			
-			// Update total number of relevant or irrelevant words
-			if (r.relevant > 0) 
-				n_relevant_terms++; 
-			else 
-				n_irrelevant_terms++;
-			
-			if (map.get(s) != null)
-				map.put(s, map.get(s) + 1);
-			else
-				map.put(s, 1f);
-		}
+		mapTermCounts(map, r.description.split("\\W+"), r.relevant, desc_weight);
+		mapTermCounts(map, r.title.split("\\W+"), r.relevant, title_weight);
 	}
 	
 	/*
@@ -134,12 +142,12 @@ public class BingBoost {
 	/*
 	 * Suggest word to be added to the query.
 	 */
-	private String addWordToQuery(String query, Map<String, Float> diffMap) {
+	private String suggestedWordToEnhanceQuery(Map<String, Float> diffMap) {
 		float highestFrequency = -1;
 		String word = "";
 		
 		for (String s : diffMap.keySet()) {
-			if (!query.contains(s) && diffMap.get(s) > highestFrequency) {
+			if (!origQuery.contains(s) && diffMap.get(s) > highestFrequency) {
 				highestFrequency = diffMap.get(s);
 				word = s;
 			}
@@ -153,24 +161,28 @@ public class BingBoost {
 	 * Count occurrences of suggested word appearing before and after query in description, check majority vote.
 	 * By default, concatenate word to end of query. Very crude, no semantic parsing.
 	 */
-	private String updateQuery(String query, String word) {
+	private String updateQueryWithSuggestion(String word) {
 		int before = 0;
 		int after = 0;
-		String[] wordOrder;
 		for (Result result : results) {
 			if (result.relevant == 0)
 				continue;
+			
 			// Note both if clauses are necessary as query may not exist in description.
-			if (result.description.indexOf(word) < result.description.indexOf(query)) 
-				before++;
-			if (result.description.indexOf(word) > result.description.indexOf(query))
-				after++;
+			if (result.description.indexOf(word) < result.description.indexOf(origQuery)) 
+				before += desc_weight;
+			if (result.description.indexOf(word) > result.description.indexOf(origQuery))
+				after += desc_weight;
+			if (result.title.indexOf(word) < result.title.indexOf(origQuery))
+				before += title_weight;
+			if (result.title.indexOf(word) > result.title.indexOf(origQuery))
+				after += title_weight;
 		}
 		//For debugging, look back at printed results marked as relevant, see if it matches.
 		//System.out.println("Before count " + before);
 		//System.out.println("After count " + after);
 		
-		String updated = (before > after) ? word + " " + query : query + " " + word;
+		String updated = (before > after) ? word + " " + origQuery : origQuery + " " + word;
 		return updated;
 	}
 	
@@ -191,19 +203,13 @@ public class BingBoost {
 		// Process the results
 		createNormalizedMaps();
 		Map<String, Float> diffMap = subtractMaps();
+		String word = suggestedWordToEnhanceQuery(diffMap);
+		String enhancedQuery = updateQueryWithSuggestion(word);
 		
-		// For debugging purposes
-		//System.out.println("Printing adjusted frequencies");
-		//printFrequencies(diffMap);
+		System.out.println("Recommended word to add to query: " + word);
+		System.out.println("Updated query: " + enhancedQuery);
 		
-		String addWord = addWordToQuery(query, diffMap);
-		query = updateQuery(query, addWord);
-		
-		System.out.println("Recommended word to add to query: " + addWord);
-		System.out.println("Updated query: " + query);
-		
-		//This was causing a crazy loop
-		return query;
+		return enhancedQuery;
 	}
 
 }

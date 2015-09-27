@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
 import org.json.JSONArray;
@@ -42,16 +43,22 @@ public class Utils {
 		return results;
 	}
 
-	public static String getPageContent(URL url) {
-        URLConnection connection = url.openConnection();
-        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
+	public static String getPageContent(String resultUrl) {
+        URLConnection connection;
         StringBuilder content = new StringBuilder();
-        String line;
-        while ((line = in.readLine()) != null) 
-            content.append(line);
+		try {
+			URL url = new URL(resultUrl);
+			connection = url.openConnection();
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	        String line;
+	        while ((line = in.readLine()) != null) 
+	            content.append(line);
 
-        in.close();
+	        in.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return content.toString();
 	}
 

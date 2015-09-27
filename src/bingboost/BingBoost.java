@@ -35,14 +35,14 @@ public class BingBoost {
 	public void boostSparseFeedback() {
 		int relevantResults = 0;
 		for (Result result : results) {
-			if (result.relevant)
+			if (result.relevant > 0)
 				relevantResults++;
 		}
 		if (relevantResults <= 2) {
 			for (Result result : results) {
-				if (result.relevant) {
+				if (result.relevant > 0) {
 					result.description.concat(" ");
-					result.description.concat(Utils.getPageContent(result.url))
+					result.description.concat(Utils.getPageContent(result.url));
 				}
 			}
 		}

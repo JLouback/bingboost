@@ -42,4 +42,25 @@ public class Utils {
 		return results;
 	}
 
+	public static String getPageContent(URL url) {
+        URLConnection connection = url.openConnection();
+        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+        StringBuilder content = new StringBuilder();
+        String line;
+        while ((line = in.readLine()) != null) 
+            content.append(line);
+
+        in.close();
+        return content.toString();
+	}
+
+	/*
+	 * Helper for testing purposes
+	 */
+	private static void printMap(Map<String, Float> map) {
+		for (String s : map.keySet())
+			System.out.println(s + " : " + map.get(s));
+	}
+
 }

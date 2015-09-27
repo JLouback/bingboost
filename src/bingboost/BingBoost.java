@@ -30,6 +30,25 @@ public class BingBoost {
 	}
 	
 	/*
+	 * Append URL document content to relevant results' description if relevant results <= 2.
+	 */
+	public void boostSparseFeedback() {
+		int relevantResults = 0;
+		for (Result result : results) {
+			if (result.relevant)
+				relevantResults++;
+		}
+		if (relevantResults <= 2) {
+			for (Result result : results) {
+				if (result.relevant) {
+					result.description.concat(" ");
+					result.description.concat(Utils.getPageContent(result.url))
+				}
+			}
+		}
+	}
+	
+	/*
 	 * Create a map of the stopwords to quickly prune documents
 	 */
 	private Set<String> readStopwords() throws FileNotFoundException, IOException {
@@ -102,10 +121,10 @@ public class BingBoost {
 		
 		// Print out the frequencies for testing purposes
 		/*System.out.println("RELEVANT TERM FREQUENCIES");
-		printFrequencies(matches);
+		Utils.printMap(matches);
 		
 		System.out.println("IRRELEVANT TERM FREQUENCIES");
-		printFrequencies(misses);*/
+		Utils.printMap(misses);*/
 	}
 	
 	private void addTermFrequencies(Map<String, Float> dest, Map<String, Float> src, float mult) {
@@ -129,14 +148,6 @@ public class BingBoost {
 		addTermFrequencies(diff_map, misses, -1);
 		
 		return diff_map;
-	}
-	
-	/*
-	 * Helper for testing purposes
-	 */
-	private void printFrequencies(Map<String, Float> map) {
-		for (String s : map.keySet())
-			System.out.println(s + " : " + map.get(s));
 	}
 	
 	/*
@@ -200,6 +211,8 @@ public class BingBoost {
 		this.origQuery = query.toLowerCase();
 		this.results = results;
 		
+		// Add URL content if relevant results are sparse (<=2)
+		boostSparseFeedback();
 		// Process the results
 		createNormalizedMaps();
 		Map<String, Float> diffMap = subtractMaps();

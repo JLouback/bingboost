@@ -19,7 +19,7 @@ public class Interaction {
 		this.boost = new BingBoost();
 		this.precision = precision;
 		this.query = query;
-		this.k = 10;
+		this.k = 4;
 		results = new Result[k];
 	}
 	

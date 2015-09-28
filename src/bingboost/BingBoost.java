@@ -29,24 +29,6 @@ public class BingBoost {
 		stopwords = readStopwords();
 	}
 	
-	/*
-	 * Append URL document content to relevant results' description if relevant results <= 2.
-	 */
-	public void boostSparseFeedback() {
-		int relevantResults = 0;
-		for (Result result : results) {
-			if (result.relevant > 0)
-				relevantResults++;
-		}
-		if (relevantResults <= 2) {
-			for (Result result : results) {
-				if (result.relevant > 0) {
-					result.description.concat(" ");
-					result.description.concat(Utils.getPageContent(result.url));
-				}
-			}
-		}
-	}
 	
 	/*
 	 * Create a map of the stopwords to quickly prune documents
@@ -211,8 +193,6 @@ public class BingBoost {
 		this.origQuery = query.toLowerCase();
 		this.results = results;
 		
-		// Add URL content if relevant results are sparse (<=2)
-		boostSparseFeedback();
 		// Process the results
 		createNormalizedMaps();
 		Map<String, Float> diffMap = subtractMaps();

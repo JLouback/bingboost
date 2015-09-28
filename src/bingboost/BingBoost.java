@@ -179,6 +179,24 @@ public class BingBoost {
 		return updated;
 	}
 	
+    /*
+     * Bonus terms that are 3 or less words away. Tunable parameters are k, bonus.
+     */
+	public void queryProximityBonus() {
+		int k = 30;
+		Float bonus = (float) 1.5;
+		for (Result r : results) {
+			for (String term : matches.keySet()) {
+				if (Utils.neighboringTerms(r.description, origQuery, term, k)) {
+					// System.out.println("New update " + term);
+					// System.out.println(matches.get(term));
+					matches.put(term, (matches.get(term) * bonus));
+					// System.out.println(matches.get(term));
+				}
+			}
+		}
+	}
+	
 	/*
 	 * Outside of the constructor, the only public function for this class. Should reset
 	 * all instance variable to process the new query and results.
@@ -195,6 +213,8 @@ public class BingBoost {
 		
 		// Process the results
 		createNormalizedMaps();
+		// Increase weight of terms near query
+		queryProximityBonus();
 		Map<String, Float> diffMap = subtractMaps();
 		String word = suggestedWordToEnhanceQuery(diffMap);
 		String enhancedQuery = updateQueryWithSuggestion(word);

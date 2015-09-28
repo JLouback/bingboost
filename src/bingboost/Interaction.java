@@ -19,7 +19,7 @@ public class Interaction {
 		this.boost = new BingBoost();
 		this.precision = precision;
 		this.query = query;
-		this.k = 4;
+		this.k = 10;
 		results = new Result[k];
 	}
 	
@@ -42,7 +42,7 @@ public class Interaction {
 	public void queryAndCollectFeedback() {
 		Scanner in = new Scanner(System.in);
 		try {
-			JSONArray jsonResults = Utils.queryBing(query);
+			JSONArray jsonResults = Utils.queryBing(query, k);
 			for (int i=0; i<k; i++) {
 				System.out.println("------------------------------------------------------------");
 				JSONObject json = jsonResults.getJSONObject(i);
@@ -53,7 +53,7 @@ public class Interaction {
 				System.out.println("Enter 1 to mark as relevant, 0 for non-relevant:");
 				
 				int relevant = in.nextInt() > 0 ? 1 : 0;
-				results[i] = new Result(json.getString("Url"), json.getString("Title"), json.getString("Description"), relevant);
+				results[i] = new Result(json.getString("Title"), json.getString("Description"), relevant);
 			}
 		} catch (IOException | JSONException e) {
 			e.printStackTrace();

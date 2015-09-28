@@ -7,7 +7,6 @@ package bingboost;
 
 public class Result {
 	
-	String url;
 	String title;
 	String description;
 	int relevant;
@@ -15,8 +14,7 @@ public class Result {
 	/*
 	 * Store all text as lowercase for comparisons
 	 */
-	public Result(String url, String title, String description, int relevant) {
-		this.url = url;
+	public Result(String title, String description, int relevant) {
 		this.title = title.toLowerCase();
 		this.description = description.toLowerCase();
 		this.relevant = relevant;

@@ -11,17 +11,15 @@ import org.apache.commons.codec.binary.Base64;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 public class Utils {
 
-	public static JSONArray queryBing(String query) throws IOException {
+	public static JSONArray queryBing(String query, int k) throws IOException {
 		query = query.replaceAll(" ", "%20");
-        String bingUrlPattern = "https://api.datamarket.azure.com/Bing/Search/Web?Query=%%27%s%%27&$format=JSON";
-        String bingUrl = String.format(bingUrlPattern, query);
+        String bingUrlPattern = "https://api.datamarket.azure.com/Bing/Search/Web?Query=%%27%s%%27&$format=JSON&$top=%s";
+        String bingUrl = String.format(bingUrlPattern, query, k);
 
-      	String accountKey = "2M9bpBZVyiZnVJelBXtQ5qOXN9/lWbTU/E/KeNsfxS4";
+      	String accountKey = "";
       	byte[] accountKeyBytes = Base64.encodeBase64((accountKey + ":" + accountKey).getBytes());
       	String accountKeyEnc = new String(accountKeyBytes);
 
@@ -44,11 +42,25 @@ public class Utils {
 		}
 		return results;
 	}
+	
+	/*
+	 * Checks if term is within k characters of target in data string.
+	 */
+	public static boolean neighboringTerms(String data, String target, String term, int k) {
+		if (data.contains(target) && data.contains(term)) {
+			if (Math.abs(data.indexOf(target) - data.indexOf(term)) < k) {
+				return true;
+			}
+			data = data.substring(Math.min(data.indexOf(target) + target.length(), data.indexOf(term) + term.length()));
+			return neighboringTerms(data, target, term, k);
+		}
+		return false;
+	}
 
 	/*
 	 * Helper for testing purposes
 	 */
-	private static void printMap(Map<String, Float> map) {
+	public static void printMap(Map<String, Float> map) {
 		for (String s : map.keySet())
 			System.out.println(s + " : " + map.get(s));
 	}

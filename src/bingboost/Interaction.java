@@ -10,13 +10,15 @@ import org.json.JSONObject;
 public class Interaction {
 	
 	private BingBoost boost;
+	private String key;
 	private float precision;
 	private String query;
 	private int k;
 	private Result[] results;
 	
-	public Interaction(float precision, String query) throws FileNotFoundException, IOException {
-		this.boost = new BingBoost();
+	public Interaction(String key, float precision, String query) throws FileNotFoundException, IOException {
+		this.key = key;
+		this.boost = new BingBoost(query);
 		this.precision = precision;
 		this.query = query;
 		this.k = 10;
@@ -34,7 +36,7 @@ public class Interaction {
 	public String exitMessage() {
 		float current = currentPrecision();
 		if (current == 0) {
-			return "Search engine has failed. Boooo.";
+			return "Search engine has failed to meet desired precision. Boooo.";
 		}
 		return "Search engine reached desired precision level. Yay.";
 	}
@@ -42,11 +44,12 @@ public class Interaction {
 	public void queryAndCollectFeedback() {
 		Scanner in = new Scanner(System.in);
 		try {
-			JSONArray jsonResults = Utils.queryBing(query, k);
+			JSONArray jsonResults = Utils.queryBing(key, query, k);
 			for (int i=0; i<k; i++) {
 				System.out.println("------------------------------------------------------------");
 				JSONObject json = jsonResults.getJSONObject(i);
 				
+				System.out.println("Result " + (i+1));
 				System.out.println(json.get("Title"));
 				System.out.println(json.get("Description"));
 				System.out.println(json.get("Url"));
@@ -67,19 +70,18 @@ public class Interaction {
 		do {
 			// Run bingboost to modify query, should receive current query, descriptions and feedback arrays.
 			queryAndCollectFeedback();
-			query = boost.updatedQueryForFeedback(query, results);
+			// I know this isn't elegant, but I don't want unecessary information.
+			if (currentPrecision() < precision && currentPrecision() > 0)
+				query = boost.updatedQueryForFeedback(query, results);
 		} while (currentPrecision() < precision && currentPrecision() > 0);
 		System.out.println(exitMessage());
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		Scanner in = new Scanner(System.in);
-		System.out.println("Enter query:");
-		String query = in.nextLine();
-		System.out.println("Enter precision, between 0 and 1");
-		float precision = in.nextFloat();
-		Interaction interaction = new Interaction(precision, query);
+		String key = args[0];
+		float precision = Float.valueOf(args[1]);
+		String query = args[2];
+		Interaction interaction = new Interaction(key, precision, query);
 		interaction.runBingboost();	
-		in.close();
 	}
 }

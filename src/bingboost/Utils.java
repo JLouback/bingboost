@@ -14,13 +14,12 @@ import org.json.JSONObject;
 
 public class Utils {
 
-	public static JSONArray queryBing(String query, int k) throws IOException {
+	public static JSONArray queryBing(String key, String query, int k) throws IOException {
 		query = query.replaceAll(" ", "%20");
         String bingUrlPattern = "https://api.datamarket.azure.com/Bing/Search/Web?Query=%%27%s%%27&$format=JSON&$top=%s";
         String bingUrl = String.format(bingUrlPattern, query, k);
 
-      	String accountKey = "";
-      	byte[] accountKeyBytes = Base64.encodeBase64((accountKey + ":" + accountKey).getBytes());
+      	byte[] accountKeyBytes = Base64.encodeBase64((key + ":" + key).getBytes());
       	String accountKeyEnc = new String(accountKeyBytes);
 
       	URL url = new URL(bingUrl);

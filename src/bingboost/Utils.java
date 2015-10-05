@@ -16,32 +16,32 @@ public class Utils {
 
 	public static JSONArray queryBing(String key, String query, int k) throws IOException {
 		query = query.replaceAll(" ", "%20");
-        String bingUrlPattern = "https://api.datamarket.azure.com/Bing/Search/Web?Query=%%27%s%%27&$format=JSON&$top=%s";
-        String bingUrl = String.format(bingUrlPattern, query, k);
+		String bingUrlPattern = "https://api.datamarket.azure.com/Bing/Search/Web?Query=%%27%s%%27&$format=JSON&$top=%s";
+		String bingUrl = String.format(bingUrlPattern, query, k);
 
-      	byte[] accountKeyBytes = Base64.encodeBase64((key + ":" + key).getBytes());
-      	String accountKeyEnc = new String(accountKeyBytes);
+		byte[] accountKeyBytes = Base64.encodeBase64((key + ":" + key).getBytes());
+		String accountKeyEnc = new String(accountKeyBytes);
 
-      	URL url = new URL(bingUrl);
+		URL url = new URL(bingUrl);
 		URLConnection connection = url.openConnection();
 		connection.setRequestProperty("Authorization", "Basic " + accountKeyEnc);
 
 		JSONArray results = null;
-        try (final BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-            String line;
-            StringBuilder response = new StringBuilder();
-            while ((line = in.readLine()) != null) {
-                response.append(line);
-            }
-            final JSONObject json = new JSONObject(response.toString());
-            results = json.getJSONObject("d").getJSONArray("results");
-        } catch (JSONException e) {
+		try (final BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+			String line;
+			StringBuilder response = new StringBuilder();
+			while ((line = in.readLine()) != null) {
+				response.append(line);
+			}
+			final JSONObject json = new JSONObject(response.toString());
+			results = json.getJSONObject("d").getJSONArray("results");
+		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return results;
 	}
-	
+
 	/*
 	 * Checks if term is within k characters of target in data string.
 	 */

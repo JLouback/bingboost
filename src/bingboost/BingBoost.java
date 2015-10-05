@@ -115,23 +115,6 @@ public class BingBoost {
 		Utils.printMap(misses);*/
 	}
 
-	/*
-	 * Remove stopwords from result set.
-	 */
-	private void pruneStopwords() {
-		for (Result r : results) {
-			for (String word : stopwords) {
-				System.out.println(word);
-				if (r.title.contains(word))
-					r.title = r.title.replaceAll(word, "");
-				if (r.description.contains(word))
-					r.description = r.description.replaceAll(word, "");
-			}
-			System.out.println(r.title);
-			System.out.println(r.description);
-		}
-	}
-	
 	private void addTermFrequencies(Map<String, Float> dest, Map<String, Float> src, float mult) {
 		for (String s : src.keySet()) {
 			float val = src.get(s) * mult;
@@ -153,7 +136,7 @@ public class BingBoost {
 
 		return diff_map;
 	}
-	
+
 	/*
 	 * Concatenates result titles
 	 */
@@ -259,12 +242,12 @@ public class BingBoost {
 	 * Avoid reconstructing this object as you have to read in the stopwords each time.
 	 */
 	public String updatedQueryForFeedback(String query, Result[] results) {
-		this.results = results;
-		this.query = query;
 		// Initialize instance variables
 		n_relevant_terms = n_irrelevant_terms = 0;
 		matches = new HashMap<String, Float>();
 		misses = new HashMap<String, Float>();
+		this.results = results;
+		this.query = query;
 		// Process the results
 		createNormalizedMaps();
 		// Increase weight of terms near original query

@@ -8,14 +8,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Interaction {
-	
+
 	private BingBoost boost;
 	private String key;
 	private float precision;
 	private String query;
 	private int k;
 	private Result[] results;
-	
+
 	public Interaction(String key, float precision, String query) throws FileNotFoundException, IOException {
 		this.key = key;
 		this.boost = new BingBoost(query);
@@ -24,7 +24,7 @@ public class Interaction {
 		this.k = 10;
 		results = new Result[k];
 	}
-	
+
 	public float currentPrecision() {
 		int relevant = 0;
 		for (int i=0; i< results.length; i++) {
@@ -32,7 +32,7 @@ public class Interaction {
 		}
 		return (float) relevant / (float) k;
 	}
-	
+
 	public String exitMessage() {
 		float current = currentPrecision();
 		if (current == 0) {
@@ -40,7 +40,7 @@ public class Interaction {
 		}
 		return "Search engine reached desired precision level. Yay.";
 	}
-	
+
 	public void queryAndCollectFeedback() {
 		Scanner in = new Scanner(System.in);
 		try {
@@ -48,13 +48,13 @@ public class Interaction {
 			for (int i=0; i<k; i++) {
 				System.out.println("------------------------------------------------------------");
 				JSONObject json = jsonResults.getJSONObject(i);
-				
+
 				System.out.println("Result " + (i+1));
 				System.out.println(json.get("Title"));
 				System.out.println(json.get("Description"));
 				System.out.println(json.get("Url"));
 				System.out.println("Enter 1 to mark as relevant, 0 for non-relevant:");
-				
+
 				int relevant = in.nextInt() > 0 ? 1 : 0;
 				results[i] = new Result(json.getString("Title"), json.getString("Description"), relevant);
 			}
@@ -65,7 +65,7 @@ public class Interaction {
 		message = String.format(message, currentPrecision());
 		System.out.println(message);
 	}
-	
+
 	public void runBingboost() {
 		do {
 			// Run bingboost to modify query, should receive current query, descriptions and feedback arrays.
@@ -76,7 +76,7 @@ public class Interaction {
 		} while (currentPrecision() < precision && currentPrecision() > 0);
 		System.out.println(exitMessage());
 	}
-	
+
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		String key = args[0];
 		float precision = Float.valueOf(args[1]);

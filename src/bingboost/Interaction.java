@@ -45,6 +45,10 @@ public class Interaction {
 		Scanner in = new Scanner(System.in);
 		try {
 			JSONArray jsonResults = Utils.queryBing(key, query, k);
+			int n = (jsonResults.length() < k) ? jsonResults.length() : k;
+			System.out.println("Total no of results : " + n);
+			System.out.println("Bing Search Results:");
+			System.out.println("======================");
 			for (int i=0; i<k; i++) {
 				System.out.println("------------------------------------------------------------");
 				JSONObject json = jsonResults.getJSONObject(i);

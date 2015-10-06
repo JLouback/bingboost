@@ -15,6 +15,9 @@ public class BingBoost {
 	// How much value we place on words in the title and description
 	final int title_weight = 3;
 	final int desc_weight = 1;
+	
+	// Bonus multiplier for terms close to query words
+	final float bonus_multiplier = 1.2f;
 
 	// Initial parameters
 	final String origQuery;
@@ -48,7 +51,6 @@ public class BingBoost {
 				if (line.length() > 0 && line.charAt(0) != '#')
 					set.add(line);
 			}
-
 		}
 
 		return set;
@@ -156,15 +158,14 @@ public class BingBoost {
 	 */
 	public void queryProximityBonus() {
 		int k = 30;
-		Float bonus = (float) 1.2;
 		for (String term : matches.keySet()) {
 			if (Utils.neighboringTerms(extractData(true), origQuery, term, k)) {
-				matches.put(term, (matches.get(term) * bonus));
+				matches.put(term, (matches.get(term) * bonus_multiplier));
 			}
 		}
 		for (String term : misses.keySet()) {
 			if (Utils.neighboringTerms(extractData(false), origQuery, term, k)) {
-				misses.put(term, (misses.get(term) * bonus));
+				misses.put(term, (misses.get(term) * bonus_multiplier));
 			}
 		}
 	}

@@ -18,6 +18,7 @@ public class Utils {
 		query = query.replaceAll(" ", "%20");
 		String bingUrlPattern = "https://api.datamarket.azure.com/Bing/Search/Web?Query=%%27%s%%27&$format=JSON";
 		String bingUrl = String.format(bingUrlPattern, query);
+		System.out.println("URL: " + bingUrl);
 
 		byte[] accountKeyBytes = Base64.encodeBase64((key + ":" + key).getBytes());
 		String accountKeyEnc = new String(accountKeyBytes);

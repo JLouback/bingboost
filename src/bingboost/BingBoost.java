@@ -9,8 +9,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.atteo.evo.inflector.English;
-
 public class BingBoost {
 	// How much value we place on words in the title and description
 	final int title_weight = 3;

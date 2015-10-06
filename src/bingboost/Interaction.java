@@ -50,13 +50,14 @@ public class Interaction {
 			System.out.println("Bing Search Results:");
 			System.out.println("======================");
 			for (int i=0; i<k; i++) {
-				System.out.println("------------------------------------------------------------");
 				JSONObject json = jsonResults.getJSONObject(i);
 
 				System.out.println("Result " + (i+1));
-				System.out.println(json.get("Title"));
-				System.out.println(json.get("Description"));
-				System.out.println(json.get("Url"));
+				System.out.println("[");
+				System.out.println(" " + json.get("Url"));
+				System.out.println(" " + json.get("Title"));
+				System.out.println(" " + json.get("Description"));
+				System.out.println("]\n");
 				System.out.println("Enter 1 to mark as relevant, 0 for non-relevant:");
 
 				int relevant = in.nextInt() > 0 ? 1 : 0;

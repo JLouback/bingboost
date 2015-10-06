@@ -64,5 +64,20 @@ public class Utils {
 		for (String s : map.keySet())
 			System.out.println(s + " : " + map.get(s));
 	}
+	
+	/*
+	 * Returns 1 if the first character of resp is one of the positive values (1, y, Y), or 0 otherwise.
+	 */
+	public static int relevanceValueForString(String resp) {
+		char ch = resp.charAt(0);
+		switch (ch) {
+			case '1': 
+			case 'Y': 
+			case 'y':
+				return 1;
+			default:
+				return 0;
+		}
+	}
 
 }

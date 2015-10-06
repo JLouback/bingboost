@@ -58,9 +58,9 @@ public class Interaction {
 				System.out.println(" " + json.get("Title"));
 				System.out.println(" " + json.get("Description"));
 				System.out.println("]\n");
-				System.out.println("Enter 1 to mark as relevant, 0 for non-relevant:");
+				System.out.print("Relevant (Y/N)? ");
 
-				int relevant = in.nextInt() > 0 ? 1 : 0;
+				int relevant = Utils.relevanceValueForString(in.nextLine());
 				results[i] = new Result(json.getString("Title"), json.getString("Description"), relevant);
 			}
 		} catch (IOException | JSONException e) {

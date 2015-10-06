@@ -30,7 +30,7 @@ public class Interaction {
 		for (int i=0; i< results.length; i++) {
 			relevant += results[i].relevant;
 		}
-		return (float) relevant / (float) k;
+		return (float)relevant / (float)k;
 	}
 
 	public String exitMessage() {
@@ -66,31 +66,36 @@ public class Interaction {
 		} catch (IOException | JSONException e) {
 			e.printStackTrace();
 		}
-		String message = "Iteration complete with achieved precision of %s.";
-		message = String.format(message, currentPrecision());
-		System.out.println(message);
+		
+		System.out.println("======================");
+		System.out.println("FEEDBACK SUMMARY");
+		System.out.println("Query " + query);
+		System.out.println("Precision " + currentPrecision());
 	}
 
 	public void runBingboost() {
 		do {
-			// Run bingboost to modify query, should receive current query, descriptions and feedback arrays.
+			printParameters();
 			queryAndCollectFeedback();
-			// I know this isn't elegant, but I don't want unecessary information.
-			if (currentPrecision() < precision && currentPrecision() > 0)
+			if (currentPrecision() < precision && currentPrecision() > 0) {
+				System.out.println("Still below the desired precision of " + precision);
 				query = boost.updatedQueryForFeedback(query, results);
+			}
 		} while (currentPrecision() < precision && currentPrecision() > 0);
 		System.out.println(exitMessage());
+	}
+	
+	private void printParameters() {
+		System.out.println("Parameters:");
+		System.out.println("Client key = " + key);
+		System.out.println("Query      = " + query);
+		System.out.println("Precision  = " + precision);
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		String key = args[0];
 		float precision = Float.valueOf(args[1]);
 		String query = args[2];
-		
-		System.out.println("Parameters:");
-		System.out.println("Client key = " + key);
-		System.out.println("Query      = " + query);
-		System.out.println("Precision  = " + precision);
 		
 		Interaction interaction = new Interaction(key, precision, query);
 		interaction.runBingboost();	

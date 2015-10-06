@@ -260,8 +260,7 @@ public class BingBoost {
 		}
 		this.lastModification = word;
 		String enhancedQuery = updateQueryWithSuggestion(word);
-		System.out.println("Recommended word to add to query: " + word);
-		System.out.println("Updated query: " + enhancedQuery);
+		System.out.println("Augmenting by: " + word);
 
 		return enhancedQuery;
 	}

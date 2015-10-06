@@ -81,6 +81,12 @@ public class Interaction {
 		String key = args[0];
 		float precision = Float.valueOf(args[1]);
 		String query = args[2];
+		
+		System.out.println("Parameters:");
+		System.out.println("Client key = " + key);
+		System.out.println("Query      = " + query);
+		System.out.println("Precision  = " + precision);
+		
 		Interaction interaction = new Interaction(key, precision, query);
 		interaction.runBingboost();	
 	}

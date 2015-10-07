@@ -18,7 +18,7 @@ public class Interaction {
 
 	public Interaction(String key, float precision, String query) throws FileNotFoundException, IOException {
 		this.key = key;
-		this.boost = new BingBoost(query);
+		this.boost = new BingBoost();
 		this.precision = precision;
 		this.query = query;
 		this.k = 10;

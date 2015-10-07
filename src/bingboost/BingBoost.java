@@ -18,8 +18,7 @@ public class BingBoost {
 	final float bonus_multiplier = 1.2f;
 
 	// Initial parameters
-	final String origQuery;
-	String query;
+	String origQuery;
 	Result[] results;
 	int n_relevant_terms;
 	int n_irrelevant_terms;
@@ -29,11 +28,7 @@ public class BingBoost {
 	Map<String, Float> matches;
 	Map<String, Float> misses;
 
-	// Last word added
-	String lastModification;
-
-	public BingBoost(String origQuery) throws FileNotFoundException, IOException {
-		this.origQuery = origQuery;
+	public BingBoost() throws FileNotFoundException, IOException {
 		stopwords = readStopwords();
 	}
 
@@ -169,28 +164,6 @@ public class BingBoost {
 	}
 
 	/*
-	 * Average map values.
-	 */
-	private float averageScore(Map<String, Float> scores) {
-		float avg = 0;
-		for (Float score : scores.values()) {
-			avg += score;
-		}
-		return avg/scores.size();
-	}
-
-	/*
-	 * If last modification to query is ambiguous, revert enhancement.
-	 */
-	public void checkPreviousEnhancement() {
-		if (misses.get(lastModification) > averageScore(misses)) {
-			System.out.println("Reverting previous enhancement.");
-			query = query.replaceFirst(lastModification, "");
-			query = query.trim();
-		}
-	}
-
-	/*
 	 * Suggest word to be added to the query.
 	 */
 	private String suggestedWordToEnhanceQuery(Map<String, Float> diffMap) {
@@ -198,7 +171,7 @@ public class BingBoost {
 		String word = "";
 
 		for (String s : diffMap.keySet()) {
-			if (!query.contains(s) && diffMap.get(s) > highestScore) {
+			if (!origQuery.contains(s) && diffMap.get(s) > highestScore) {
 				highestScore = diffMap.get(s);
 				word = s;
 			}
@@ -230,7 +203,7 @@ public class BingBoost {
 				after += title_weight;
 		}
 
-		String updated = (before > after) ? word + " " + query : query + " " + word;
+		String updated = (before > after) ? word + " " + origQuery : origQuery + " " + word;
 		return updated;
 	}
 
@@ -246,7 +219,7 @@ public class BingBoost {
 		matches = new HashMap<String, Float>();
 		misses = new HashMap<String, Float>();
 		this.results = results;
-		this.query = query;
+		this.origQuery = query;
 		// Process the results
 		createNormalizedMaps();
 		// Increase weight of terms near original query
@@ -254,11 +227,6 @@ public class BingBoost {
 		Map<String, Float> scores = subtractMaps();
 
 		String word = suggestedWordToEnhanceQuery(scores);
-		// Check if previous modification should be reverted
-		if (this.lastModification != null) {
-			checkPreviousEnhancement();
-		}
-		this.lastModification = word;
 		String enhancedQuery = updateQueryWithSuggestion(word);
 		System.out.println("Augmenting by: " + word);
 

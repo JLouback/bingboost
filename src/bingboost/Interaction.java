@@ -41,6 +41,9 @@ public class Interaction {
 		return "Search engine reached desired precision level. Yay.";
 	}
 
+	/*
+	 * Show the results to the user and collect relevant/irrelevant feedback for each.
+	 */
 	public void queryAndCollectFeedback() {
 		Scanner in = new Scanner(System.in);
 		try {
@@ -73,6 +76,11 @@ public class Interaction {
 		System.out.println("Precision " + currentPrecision());
 	}
 
+	/*
+	 * Continue to enhance the query while the designed precision level has not been reached and
+	 * the current precision is greater than 0. If current precision equals 0, stop the process 
+	 * because we don't have relevant results to work with.
+	 */
 	public void runBingboost() {
 		do {
 			printParameters();
@@ -84,7 +92,7 @@ public class Interaction {
 		} while (currentPrecision() < precision && currentPrecision() > 0);
 		System.out.println(exitMessage());
 	}
-	
+
 	private void printParameters() {
 		System.out.println("Parameters:");
 		System.out.println("Client key = " + key);

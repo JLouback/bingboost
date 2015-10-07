@@ -49,6 +49,10 @@ public class BingBoost {
 		return set;
 	}
 
+	/*
+	 * Populate map with scores for each word in words based on the specified pts. Also use the relevant
+	 * int (0 for irrelevant, 1 for relevant) to help us keep track of the number of terms for each.
+	 */
 	private void mapTermCounts(Map<String, Float> map, String[] words, int relevant, float pts) {
 		for (String s : words) {
 			if (stopwords.contains(s))
@@ -101,15 +105,12 @@ public class BingBoost {
 			for (String s : misses.keySet())
 				misses.put(s, misses.get(s) / n_irrelevant_terms);
 		}
-
-		// Print out the frequencies for testing purposes
-		/*System.out.println("RELEVANT TERM FREQUENCIES");
-		Utils.printMap(matches);
-
-		System.out.println("IRRELEVANT TERM FREQUENCIES");
-		Utils.printMap(misses);*/
 	}
 
+	/*
+	 * Used to add the scores for terms in the src map to the dest map give a mult that should be applied
+	 * to each value in src before the addition takes place. multi is made negative to perform subtraction
+	 */
 	private void addTermFrequencies(Map<String, Float> dest, Map<String, Float> src, float mult) {
 		for (String s : src.keySet()) {
 			float val = src.get(s) * mult;
@@ -120,6 +121,10 @@ public class BingBoost {
 		}
 	}
 
+	/*
+	 * Creates the difference map given the matches and misses maps built up from processes the 
+	 * relevant and irrelevant results
+	 */
 	private Map<String, Float> subtractMaps() {
 		Map<String, Float> diff_map = new HashMap<String, Float>();
 

@@ -61,9 +61,9 @@ Additional information:
      appeared frequently in the results marked as non-relevant, this term was
      removed from the current query. The enhanced query for iteration k was then
      the query at iteration k - 2 and the suggested enhancement at iteration k.
-     A prior enhancement would be deemed ambiguous and consequently reverted if the
-     score on non-relevant results was above the average in iteration k. This
-     worked well when a mishap with API calls only returned one relevant result for
-     'gates', this being Bill & Melinda Gates Foundation which initially suggested
-     adding 'melinda' to the query. By the next round, 'melinda' was removed
-     and 'bill' added, then reaching 0.9+ precision.
+     A prior enhancement would be deemed ambiguous and consequently reverted if
+     the score on non-relevant results was above the average in iteration k. This
+     worked well when a mishap with API calls only returned one relevant result
+     for 'gates', this being Bill & Melinda Gates Foundation which initially
+     suggested adding 'melinda' to the query. By the next round, 'melinda' was
+     removed and 'bill' added, then reaching 0.9+ precision.

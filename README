@@ -38,18 +38,18 @@ Internal design:
      is in 'matches', non-relevant in 'misses'. Note that words in the title
      receive 3 counts per occurrence and in the description only 1.
   3) Words beginning within 30 characters of the beginning of the query (if 
-     occurring in Result descriptions) have their score increased by 20%, both for
-     relevant and non-relevant results (method queryProximityBonus).
+     occurring in Result descriptions) have their score increased by 20%, both
+     for relevant and non-relevant results (method queryProximityBonus).
   4) All scores (values) in misses are subtracted from the scores in misses,
      providing keys match (method subtractMaps).
-  5) The word (key) with the highest score is selected as the suggested enhancement
-     (method suggestedWordToEnhanceQuery).
-  6) For all relevant Results, count occurrences of suggested enhancement appearing
-     before and after query in both the title and description. By majority vote,
-     return the enhanced query with the suggested enhancement at the beginning or
-     appended to the end (updateQueryWithSuggestion).
-     Note only first occurences are considered; a more elaborate analysis would be
-     possible with sentence extractio. However the descriptions returned by Bing 
+  5) The word (key) with the highest score is selected as the suggested
+     enhancement (method suggestedWordToEnhanceQuery).
+  6) For all relevant Results, count occurrences of suggested enhancement
+     appearing before and after query in both the title and description. By
+     majority vote, return the enhanced query with the suggested enhancement
+     at the beginning or appended to the end (updateQueryWithSuggestion).
+     Note only first occurences are considered; a more elaborate analysis would
+     be possible with sentence extractio. However the result descriptions
      are frequently an unstructured collage of phrases, not complete senteces.
 
 Bing Search Account Key:
@@ -62,8 +62,8 @@ Additional information:
      removed from the current query. The enhanced query for iteration k was then
      the query at iteration k - 2 and the suggested enhancement at iteration k.
      A prior enhancement would be deemed ambiguous and consequently reverted if the
-     score on non-relevant results was above the average in iteration k. This worked
-     nicely when a mishap with API calls only returned one relevant result for
+     score on non-relevant results was above the average in iteration k. This
+     worked well when a mishap with API calls only returned one relevant result for
      'gates', this being Bill & Melinda Gates Foundation which initially suggested
      adding 'melinda' to the query. By the next round, 'melinda' was removed
      and 'bill' added, then reaching 0.9+ precision.

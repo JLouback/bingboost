@@ -1,7 +1,7 @@
-Team:
+*Team:*
   Anthony Dubis (ajd2194) & Juliana Louback (jl4354)
   
-Files:
+*Files:*
   BingBoost.java - Query modification algorithm
   Interaction.java - All user interaction
   Result.java - Object for storing result data
@@ -9,28 +9,34 @@ Files:
   stopwords.txt - List of stopwords from the Onix Text Retrieval Toolkit
   BingBoost.jar (includes java.io, java.util and json libraries)
   
-How to run:
+*How to run:*
   java -jar BingBoost.jar <account_key> <precision> <query>
   Example: java -jar BingBoost.jar mykey123 0.9 'milky way'
 
-Internal design:
-  1) Interaction receives account key, precision and query from command line arguments.
-  2) Interaction calls Utils method queryBing with the account key and query parameters; this method will query the
-     Bing API (default configurations), returning a JSON array of results.
-  3) Interaction displays the top 10 titles, urls and descriptions of each results, collecting relevancy feedback.
-  4) Interaction saves an array of 10 Result objects, containing the respective title, description and relevancy.
+*Internal design:*
+  1) Interaction receives account key, precision and query from the command line.
+  2) Interaction calls Utils method queryBing with the account key and query; 
+     this method will query the Bing API (default configurations), returning a
+     JSON array of results.
+  3) Interaction displays the top 10 titles, urls and descriptions of each results,
+     collecting relevancy feedback.
+  4) Interaction saves an array of 10 Result objects, containing the respective
+     title, description and relevancy.
   If precision is not 0 or above desired precision:
-  5) Interaction calls BingBoost funciton updatedQueryForFeedback, sending the array of Results and query
-     as input, receiving the enhanced query as output.
+  5) Interaction calls BingBoost funciton updatedQueryForFeedback, sending the array
+     of Results and query as input, receiving the enhanced query as output.
   6) Repeat steps 2-5 with enhanced query until desired precision or zero precision.
 
-Query modification method:
-  1) The method updatedQueryForFeedback receives a query and an array of Result objects as parameters.
-  2) From (1), call createNormalizedMaps which populates two HashMaps, 'matches' and 'misses'. The keys are the
-     words extracted from the Result title and description, the values are the frequency of the respective term,
-     normalized by the total number of words from all titles/descriptions for relevant and non-relevant results,
-     respectively. Data pertaining to the relevant results is in 'matches', non-relevant in 'misses'. Note that
-     words in the title receive 3 counts per occurrence, in description only 1 (greater weight for title terms).
+*Query modification method:*
+  1) The method updatedQueryForFeedback receives a query and an array of Result
+     objects as parameters.
+  2) From (1), call createNormalizedMaps which populates two HashMaps, 'matches'
+     and 'misses'. The keys are the words extracted from the Result title and description,
+     the values are the frequency of the respective term, normalized by the total number
+     of words from all titles/descriptions for relevant and non-relevant results,
+     respectively. Data pertaining to the relevant results is in 'matches', non-relevant
+     in 'misses'. Note that words in the title receive 3 counts per occurrence, in description
+     only 1 (greater weight for title terms).
   3) Words beginning within 30 characters of the beginning of the query (if occurring in Result descriptions)
      have their score increased by 20%, both for relevant and non-relevant results in method queryProximityBonus.
   4) All scores (values) in misses are subtracted from the scores in misses, providing keys match (subtractMaps).

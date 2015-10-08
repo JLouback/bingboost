@@ -27,7 +27,7 @@ Internal design:
      array of Results and query as input, receiving the enhanced query as output.
   6) Repeat steps 2-5 with enhanced query until desired or zero precision.
 
-*Query modification method:*
+Query modification method:
   1) The method updatedQueryForFeedback receives a query and an array of Result
      objects as parameters.
   2) From (1), call createNormalizedMaps which populates two HashMaps, 'matches'

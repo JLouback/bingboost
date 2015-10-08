@@ -155,7 +155,7 @@ public class BingBoost {
 	 * Bonus terms that are k or less chars away. Tunable parameters are k, bonus.
 	 */
 	public void queryProximityBonus() {
-		int k = 30;
+		int k = 25;
 		for (String term : matches.keySet()) {
 			if (Utils.neighboringTerms(extractData(true), origQuery, term, k)) {
 				matches.put(term, (matches.get(term) * bonus_multiplier));

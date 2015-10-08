@@ -57,12 +57,12 @@ Bing Search Account Key:
 Additional information:
   1) We are only adding one word per iteration.
   2) Due to an oversight, we implemented a 'enhancement reversal' function.
-     On iteration k (for k > 1), if the word added to the query on iteration k - 1
+     On iteration k (for k > 1), if the word added to the query on iteration k-1
      appeared frequently in the results marked as non-relevant, this term was
      removed from the current query. The enhanced query for iteration k was then
-     the query at iteration k - 2 and the suggested enhancement at iteration k.
+     the query at iteration k-2 and the suggested enhancement at iteration k.
      A prior enhancement would be deemed ambiguous and consequently reverted if
-     the score on non-relevant results was above the average in iteration k. This
+     the score on non-relevant results was above the average in iteration k. It
      worked well when a mishap with API calls only returned one relevant result
      for 'gates', this being Bill & Melinda Gates Foundation which initially
      suggested adding 'melinda' to the query. By the next round, 'melinda' was

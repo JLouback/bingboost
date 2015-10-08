@@ -24,7 +24,8 @@ Internal design:
      title, description and relevancy.
   If precision is not 0 or above desired precision:
   5) Interaction calls BingBoost funciton updatedQueryForFeedback, sending the
-     array of Results and query as input, receiving the enhanced query as output.
+     array of Results and query as input, receiving the enhanced query as
+     output.
   6) Repeat steps 2-5 with enhanced query until desired or zero precision.
 
 Query modification method:
@@ -32,7 +33,7 @@ Query modification method:
      objects as parameters.
   2) From (1), call createNormalizedMaps which populates two HashMaps, 'matches'
      and 'misses'. The keys are the words extracted from the Result title and
-     description, the values are the frequency of the respective term, normalized
+     description, values are the frequency of the respective term, normalized
      by the total number of words from all titles/descriptions for relevant and
      non-relevant results, respectively. Data pertaining to the relevant results
      is in 'matches', non-relevant in 'misses'. Note that words in the title

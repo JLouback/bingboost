@@ -1,0 +1,575 @@
+Query 1:
+---------------------------------------------------------------------------------------------------
+Julianas-MacBook-Air:Desktop julianalouback$ java -jar BingBoost.jar [account key] 0.9 'musk'
+Parameters:
+Client key = [account key]
+Query      = musk
+Precision  = 0.9
+URL: https://api.datamarket.azure.com/Bing/Search/Web?Query=%27musk%27&$format=JSON
+Total no of results : 10
+Bing Search Results:
+======================
+Result 1
+[
+ http://www.ibtimes.com/elon-musk-details-plan-create-tiny-pulsing-suns-over-mars-2125687
+ Elon Musk Details Plan To Create 'Tiny Pulsing Suns' Over Mars
+ In his comments, made during a SolarCity solar panel launch event in Manhattan, Musk said that these “suns” would need to be created using technology that doesn ...
+]
+
+Relevant (Y/N)? Y
+Result 2
+[
+ http://en.wikipedia.org/wiki/Musk
+ Musk - Wikipedia, the free encyclopedia
+ Musk is a class of aromatic substances commonly used as base notes in perfumery. They include glandular secretions from animals such as the musk deer, numerous plants ...
+]
+
+Relevant (Y/N)? N
+Result 3
+[
+ http://dictionary.reference.com/browse/musk
+ Musk | Define Musk at Dictionary.com
+ noun 1. a substance secreted in a glandular sac under the skin of the abdomen of the male musk deer, having a strong odor, and used in perfumery. 2. an artificial ...
+]
+
+Relevant (Y/N)? N
+Result 4
+[
+ http://en.wikipedia.org/wiki/Elon_Musk
+ Elon Musk - Wikipedia, the free encyclopedia
+ Elon Reeve Musk (born June 28, 1971) is a South African-born Canadian-American business magnate, engineer, inventor and investor. [14] He is the CEO and CTO of SpaceX ...
+]
+
+Relevant (Y/N)? Y
+Result 5
+[
+ https://twitter.com/ElonMusk
+ Elon Musk (@elonmusk) | Twitter
+ Elon Musk-backed SolarCity claims to have built industry's most efficient solar panel http://www. theverge.com/2015/10/2/9439 173/elon-musk-backed-solarcity-claims-to ...
+]
+
+Relevant (Y/N)? Y
+Result 6
+[
+ https://www.facebook.com/MUSK.DISCO
+ MUSK
+ MUSK are Lennart Döring and Gerald Zollner, who met in Berlin's nightlife back in 2009. Soon after they went through the history of dancemusic, ...
+]
+
+Relevant (Y/N)? N
+Result 7
+[
+ http://www.merriam-webster.com/dictionary/musk
+ Musk | Definition of musk by Merriam-Webster
+ Definition of MUSK for Kids: a strong-smelling material that is used in perfumes and is obtained from a gland of an Asian deer (musk deer) or is prepared artificially
+]
+
+Relevant (Y/N)? N
+Result 8
+[
+ http://www.fragrantica.com/notes/Musk-4.html
+ Musk perfume ingredient, Musk fragrance and essential oils ...
+ Musk is a whole class of fragrant substances used as base notes in perfumery. This wonderful animalistic note creates a groundwork on which the rest of the aromatic ...
+]
+
+Relevant (Y/N)? N
+Result 9
+[
+ http://www.amazon.com/s?ie=UTF8&page=1&rh=n%3A3760911%2Ck%3Aperfume%20musk
+ Amazon.com: perfume musk: Beauty
+ ASDM Beverly Hills Egyptian Musk, A Rich, Egyptian Musk with Precious Wood Blends and Floral Top Note., 0.5 Ounce
+]
+
+Relevant (Y/N)? N
+Result 10
+[
+ http://mashable.com/2015/10/06/elon-musk-vanity-fair/
+ Elon Musk is not a fan of Donald Trump - Mashable
+ Elon Musk covered his thoughts on human longevity, life on Mars and why he sometimes deletes tweets at Vanity Fair's New Establishment Summit.
+]
+
+Relevant (Y/N)? Y
+======================
+FEEDBACK SUMMARY
+Query musk
+Precision 0.4
+Still below the desired precision of 0.9
+Augmenting by: elon
+Parameters:
+Client key = xEclRHyaeifHK1pAfF9bZaOT1H5uWqJezoOt6uIEHsQ=
+Query      = elon musk
+Precision  = 0.9
+URL: https://api.datamarket.azure.com/Bing/Search/Web?Query=%27elon%20musk%27&$format=JSON
+Total no of results : 10
+Bing Search Results:
+======================
+Result 1
+[
+ http://en.wikipedia.org/wiki/Elon_Musk
+ Elon Musk - Wikipedia, the free encyclopedia
+ Elon Reeve Musk (born June 28, 1971) is a South African-born Canadian-American business magnate, engineer, inventor and investor. [14] He is the CEO and CTO of SpaceX ...
+]
+
+Relevant (Y/N)? Y
+Result 2
+[
+ https://twitter.com/ElonMusk
+ Elon Musk (@elonmusk) | Twitter
+ Elon Musk-backed SolarCity claims to have built industry's most efficient solar panel http://www. theverge.com/2015/10/2/9439 173/elon-musk-backed-solarcity-claims-to ...
+]
+
+Relevant (Y/N)? Y
+Result 3
+[
+ http://www.forbes.com/profile/elon-musk/
+ Elon Musk - Forbes
+ Elon Musk's meteoric ride hit a speed bump in June when one of his SpaceX rockets, on its way to resupply the International Space Station, exploded two minutes into ...
+]
+
+Relevant (Y/N)? Y
+Result 4
+[
+ http://www.biography.com/people/elon-musk-20837159#!
+ Elon Musk - Engineer, Inventor, Explorer - Biography.com
+ Elon Musk is an entrepreneur known for co-founding Tesla Motors, X.com—which later became PayPal—and SpaceX, the last of which launched a landmark commercial ...
+]
+
+Relevant (Y/N)? Y
+Result 5
+[
+ http://fortune.com/2015/10/07/elon-musk-jack-dorsey-twitter-square/
+ Elon Musk to Jack Dorsey: Don't run two companies
+ As the dual-CEO of Tesla and SpaceX, Elon Musk's advice to Jack Dorsey, CEO of Twitter and Square, on running two companies is: don't do it.
+]
+
+Relevant (Y/N)? Y
+Result 6
+[
+ http://www.imdb.com/name/nm1907769/
+ Elon Musk - IMDb
+ Elon Musk was born on June 28, 1971 in Pretoria, South Africa as Elon Reeve Musk. He is a producer and actor, known for Machete Kills (2013), Revenge of the Electric ...
+]
+
+Relevant (Y/N)? Y
+Result 7
+[
+ http://www.cnbc.com/elon-musk/
+ Elon Musk - CNBC
+ Tesla Motors CEO Elon Musk introduces the first of the company's long-awaited Model X electric sports-utility (SUV) vehicles.
+]
+
+Relevant (Y/N)? Y
+Result 8
+[
+ http://www.huffingtonpost.com/news/elon-musk/
+ elon musk: Pictures, Videos, Breaking News
+ Big News on elon musk. Includes blogs, news, and community conversations about elon musk.
+]
+
+Relevant (Y/N)? Y
+Result 9
+[
+ http://abcnews.go.com/topics/business/CEOs/elon-musk.htm
+ Elon Musk News, Photos and Videos - ABC News
+ Browse Elon Musk latest news and updates, watch videos and view all photos and more. Join the discussion and find more about Elon Musk at abcnews.com
+]
+
+Relevant (Y/N)? Y
+Result 10
+[
+ http://abcnews.go.com/Technology/elon-musks-surprising-advice-running-companies/story?id=34308676
+ Elon Musk's Surprising Advice on Running Two Companies ...
+ While Musk is clearly passionate about the work he does at both of his companies, he had some surprising advice for anyone wondering what it's like to be ...
+]
+
+Relevant (Y/N)? Y
+======================
+FEEDBACK SUMMARY
+Query elon musk
+Precision 1.0
+Search engine reached desired precision level. Yay.
+
+
+Query 2:
+---------------------------------------------------------------------------------------------------
+Julianas-MacBook-Air:Desktop julianalouback$ java -jar BingBoost.jar [account key] 0.9 'gates'
+Parameters:
+Client key = [account key]
+Query      = gates
+Precision  = 0.9
+URL: https://api.datamarket.azure.com/Bing/Search/Web?Query=%27gates%27&$format=JSON
+Total no of results : 10
+Bing Search Results:
+======================
+Result 1
+[
+ http://www.gates.com/
+ Gates Corporation
+ Gates Corporation is Powering Progress™ in the Oil & Gas, Energy, Mining, Marine, Agriculture, Transportation and Automotive Industries.
+]
+
+Relevant (Y/N)? N
+Result 2
+[
+ http://www.gatecrafters.com/design_your_gates.aspx
+ Driveway Gates | Automatic Gates | Electric Gates
+ Driveway Gates - Automatic Gates The high-quality driveway gates from GateCrafters.com come in a wide variety of options to ...
+]
+
+Relevant (Y/N)? N
+Result 3
+[
+ http://en.wikipedia.org/wiki/Bill_Gates
+ Bill Gates - Wikipedia, the free encyclopedia
+ William Henry "Bill" Gates III (born October 28, 1955) is an American business magnate, philanthropist, investor, computer programmer, and inventor. In 1975, Gates co ...
+]
+
+Relevant (Y/N)? Y
+Result 4
+[
+ http://en.wikipedia.org/wiki/Gates
+ Gates - Wikipedia, the free encyclopedia
+ Gates may refer to: Contents 1 People 2 Places 3 Art and entertainment 4 See also People Gates (surname) Gates Brown, American baseball player Gates McFadden ...
+]
+
+Relevant (Y/N)? N
+Result 5
+[
+ https://www.facebook.com/gatesnj
+ gates
+ gates. 13,913 likes · 194 talking about this. www.gatesnj.com. Facebook logo. Email or Phone: Password: Keep me logged in. Forgot your password? Sign Up. gates
+]
+
+Relevant (Y/N)? N
+Result 6
+[
+ http://www.amazon.com/s?ie=UTF8&page=1&rh=i%3Aaps%2Ck%3Agates
+ Amazon.com: gates
+ Product Features Expands to become a 192-inch wall mounted gate or free standing barrier
+]
+
+Relevant (Y/N)? N
+Result 7
+[
+ http://www.gates.com/catalogs-and-resources/catalogs
+ Gates Belts, Hose, & Hydraulics Catalogs | Gates Corporation
+ Gate is a leading global, industrial, diversified company. View our catalogs to learn more about our belts, hose, & hydraulic products.
+]
+
+Relevant (Y/N)? N
+Result 8
+[
+ http://www.gatesbbq.com/
+ Gates Bar B.Q.
+ With the tantalizing hickory barbecue smell drawing the customer through the ranch-style doors, he is immediately greeted.
+]
+
+Relevant (Y/N)? N
+Result 9
+[
+ http://www.forbes.com/profile/bill-gates/
+ Bill Gates - Forbes
+ Forty years ago, when Bill Gates and Paul Allen launched Microsoft, Gates' goal of getting a computer on every person's desk seemed audacious.
+]
+
+Relevant (Y/N)? Y
+Result 10
+[
+ http://www.gatesfoundation.org/
+ Bill & Melinda Gates Foundation
+ The Gates Foundation’s effort to eradicate polio offers the chance to protect millions of children from paralysis forever.
+]
+
+Relevant (Y/N)? Y
+======================
+FEEDBACK SUMMARY
+Query gates
+Precision 0.3
+Still below the desired precision of 0.9
+Augmenting by: bill
+Parameters:
+Client key = xEclRHyaeifHK1pAfF9bZaOT1H5uWqJezoOt6uIEHsQ=
+Query      = bill gates
+Precision  = 0.9
+URL: https://api.datamarket.azure.com/Bing/Search/Web?Query=%27bill%20gates%27&$format=JSON
+Total no of results : 10
+Bing Search Results:
+======================
+Result 1
+[
+ http://www.gatesnotes.com/
+ Home | Bill Gates
+ This is my personal blog, where I share about the people I meet, the books I'm reading, and what I'm learning. I hope that you'll join the conversation.
+]
+
+Relevant (Y/N)? Y
+Result 2
+[
+ http://en.wikipedia.org/wiki/Bill_Gates
+ Bill Gates - Wikipedia, the free encyclopedia
+ William Henry "Bill" Gates III (born October 28, 1955) is an American business magnate, philanthropist, investor, computer programmer, and inventor. In 1975, Gates co ...
+]
+
+Relevant (Y/N)? Y
+Result 3
+[
+ http://www.gatesfoundation.org/
+ Bill & Melinda Gates Foundation
+ The Gates Foundation’s effort to eradicate polio offers the chance to protect millions of children from paralysis forever.
+]
+
+Relevant (Y/N)? Y
+Result 4
+[
+ https://www.facebook.com/BillGates
+ Bill Gates
+ Bill Gates is on Facebook. To connect with Bill Gates, sign up for Facebook today. Sign Up Log In. Bill Gates. Public Figure. Public Cancel Save Changes. Bill Gates.
+]
+
+Relevant (Y/N)? Y
+Result 5
+[
+ https://twitter.com/billgates
+ Bill Gates (@BillGates) | Twitter
+ 1,810 tweets • 500 photos/videos • 25M followers. "Could computer modeling and machine learning help prevent the next epidemic? http://t.co/cSmnt1SD5w @IEEESpectrum"
+]
+
+Relevant (Y/N)? Y
+Result 6
+[
+ http://www.forbes.com/profile/bill-gates/
+ Bill Gates - Forbes
+ Forty years ago, when Bill Gates and Paul Allen launched Microsoft, Gates' goal of getting a computer on every person's desk seemed audacious.
+]
+
+Relevant (Y/N)? Y
+Result 7
+[
+ http://www.biography.com/people/bill-gates-9307520#!
+ Bill Gates - Business Leader, Entrepreneur, Philanthropist ...
+ Entrepreneur Bill Gates founded the world's largest software business, Microsoft, with Paul Allen, and subsequently became one of the richest men in the world.
+]
+
+Relevant (Y/N)? Y
+Result 8
+[
+ http://news.microsoft.com/2008/06/03/bill-gates-keynote-microsoft-tech%e2%80%a2ed-2008-developers/
+ Bill Gates Keynote: Microsoft Tech•Ed 2008 — Developers ...
+ BILL GATES: Good morning and welcome to Tech•Ed. This is the first year that we broke Tech•Ed into two sections, the section this week, which is just ...
+]
+
+Relevant (Y/N)? Y
+Result 9
+[
+ http://www.huffingtonpost.com/news/bill-gates/
+ Bill Gates: Pictures, Videos, Breaking News
+ Big News on Bill Gates. Includes blogs, news, and community conversations about Bill Gates.
+]
+
+Relevant (Y/N)? Y
+Result 10
+[
+ http://inventors.about.com/od/gstartinventors/a/Bill_Gates.htm
+ Bill Gates - Biography
+ Bill Gates came from a family of entrepreneurship and high-spirited liveliness. William Henry Gates III was born in Seattle, Washington on October 28th, 1955.
+]
+
+Relevant (Y/N)? Y
+======================
+FEEDBACK SUMMARY
+Query bill gates
+Precision 1.0
+Search engine reached desired precision level. Yay.
+
+
+Query 3:
+---------------------------------------------------------------------------------------------------
+Julianas-MacBook-Air:Desktop julianalouback$ java -jar BingBoost.jar [account key] 0.9 'taj mahal'
+Parameters:
+Client key = [account key]
+Query      = taj mahal
+Precision  = 0.9
+URL: https://api.datamarket.azure.com/Bing/Search/Web?Query=%27taj%20mahal%27&$format=JSON
+Total no of results : 10
+Bing Search Results:
+======================
+Result 1
+[
+ http://en.wikipedia.org/wiki/Taj_Mahal
+ Taj Mahal - Wikipedia, the free encyclopedia
+ The Taj Mahal is a white marble mausoleum located on the southern bank of the Yamuna River in the Indian city of Agra. It was commissioned in 1632 by the Mughal ...
+]
+
+Relevant (Y/N)? N
+Result 2
+[
+ http://www.history.com/topics/taj-mahal
+ The Taj Mahal - Facts & Summary - HISTORY.com
+ Find out more about the history of The Taj Mahal, including videos, interesting articles, pictures, historical features and more. Get all the facts on HISTORY.com
+]
+
+Relevant (Y/N)? N
+Result 3
+[
+ http://www.trumptaj.com/
+ Atlantic City New Jersey Casino Hotels | Trump Taj Mahal ...
+ For five star Atlantic City Casino hotels, Trump Taj Mahal Casino Hotel offers restaurants, nightlife and a casino floor you can't resist. Explore our Atlantic City ...
+]
+
+Relevant (Y/N)? N
+Result 4
+[
+ http://tajmahal.gov.in/
+ Welcome To Official WebSite of Taj Mahal-U.P.Tourism
+ Official website by Department of Tourism, Government of Uttar Pradesh. Details about Taj Mahal, ticketing, tours, and tourist information.
+]
+
+Relevant (Y/N)? N
+Result 5
+[
+ http://www.tajmahal.com/
+ Taj Mahal India
+ Taj Mahal, Taj Mahal history, taj mahal location, pictures, information, taj mahal tours, tickets and packages. Taj Mahal India
+]
+
+Relevant (Y/N)? N
+Result 6
+[
+ http://www.tajblues.com/
+ An International Treasure - Taj Mahal
+ Official site includes news, tour schedule, discography, audio/video and pictures.
+]
+
+Relevant (Y/N)? Y
+Result 7
+[
+ http://www.allmusic.com/artist/taj-mahal-mn0000790604
+ Taj Mahal | Biography, Albums, & Streaming Radio | AllMusic
+ Find Taj Mahal bio, music, credits, awards, & streaming radio on AllMusic - A guitarist and singer/songwriter who took an…
+]
+
+Relevant (Y/N)? Y
+Result 8
+[
+ http://www.last.fm/music/Taj+Mahal
+ Taj Mahal — Free listening, videos, concerts, stats and ...
+ Taj Mahal (born Henry Saint Clair Fredericks in New York City on May 17, 1942) is an American Grammy Award-winning blues musician who incorporates elements of world ...
+]
+
+Relevant (Y/N)? Y
+Result 9
+[
+ http://www.amazon.com/Taj-Mahal/e/B000APY7PY
+ Amazon.com: Taj Mahal: Songs, Albums, Pictures, Bios
+ Visit Amazon.com's Taj Mahal Store to shop for Taj Mahal albums (CD, MP3, Vinyl), concert tickets, and other Taj Mahal-related products (DVDs, Books, T-shirts). Also ...
+]
+
+Relevant (Y/N)? Y
+Result 10
+[
+ http://en.wikipedia.org/wiki/Taj_Mahal_(musician)
+ Taj Mahal (musician) - Wikipedia, the free encyclopedia
+ Henry Saint Clair Fredericks (born May 17, 1942), who uses the stage name Taj Mahal, is an American blues musician. He often incorporates elements of world music into ...
+]
+
+Relevant (Y/N)? Y
+======================
+FEEDBACK SUMMARY
+Query taj mahal
+Precision 0.5
+Still below the desired precision of 0.9
+Augmenting by: albums
+Parameters:
+Client key = xEclRHyaeifHK1pAfF9bZaOT1H5uWqJezoOt6uIEHsQ=
+Query      = albums taj mahal
+Precision  = 0.9
+URL: https://api.datamarket.azure.com/Bing/Search/Web?Query=%27albums%20taj%20mahal%27&$format=JSON
+Total no of results : 10
+Bing Search Results:
+======================
+Result 1
+[
+ http://www.amazon.com/Taj-Mahal/e/B000APY7PY
+ Amazon.com: Taj Mahal: Songs, Albums, Pictures, Bios
+ Visit Amazon.com's Taj Mahal Store to shop for Taj Mahal albums (CD, MP3, Vinyl), concert tickets, and other Taj Mahal-related products (DVDs, Books, T-shirts). Also ...
+]
+
+Relevant (Y/N)? Y
+Result 2
+[
+ http://en.wikipedia.org/wiki/Taj_Mahal_(album)
+ Taj Mahal (album) - Wikipedia, the free encyclopedia
+ Taj Mahal is the debut American blues album by Taj Mahal.
+]
+
+Relevant (Y/N)? Y
+Result 3
+[
+ http://www.discogs.com/artist/15158-Taj-Mahal
+ Taj Mahal Discography at Discogs
+ Complete your Taj Mahal record collection. Discover Taj Mahal's full discography. Shop new and used Vinyl and CDs.
+]
+
+Relevant (Y/N)? Y
+Result 4
+[
+ http://www.allmusic.com/artist/taj-mahal-mn0000790604/discography
+ Taj Mahal | Album Discography | AllMusic
+ Find Taj Mahal discography, albums and singles on AllMusic
+]
+
+Relevant (Y/N)? Y
+Result 5
+[
+ http://www.tajblues.com/discography/
+ Discography - Taj Mahal
+ 7 Discography - Taj Mahal page page-id-7 page-template page-template-tpl-discography ... “Live Catch” places you “front row and center” with The Taj Mahal Trio.
+]
+
+Relevant (Y/N)? N
+Result 6
+[
+ http://www.naturalgeographicmagazine.com/q/Taj_Mahal_(musician)_live_albums
+ Taj Mahal (musician) live albums
+ The Real Thing (Taj Mahal album) The Real Thing is a 1971 live album by Taj Mahal. It was recorded on February 13, 1971 at the Fillmore East in New York City and ...
+]
+
+Relevant (Y/N)? Y
+Result 7
+[
+ http://en.wikipedia.org/wiki/Taj_Mahal_(musician)
+ Taj Mahal (musician) - Wikipedia, the free encyclopedia
+ Henry Saint Clair Fredericks (born May 17, 1942), who uses the stage name Taj Mahal, is an American blues musician. He often incorporates elements of world music into ...
+]
+
+Relevant (Y/N)? Y
+Result 8
+[
+ http://www.allmusic.com/artist/taj-mahal-mn0000790604
+ Taj Mahal | Biography, Albums, & Streaming Radio | AllMusic
+ Find Taj Mahal bio, music, credits, awards, & streaming radio on AllMusic - A guitarist and singer/songwriter who took an…
+]
+
+Relevant (Y/N)? Y
+Result 9
+[
+ http://www.grooves-inc.com/taj-mahal-real-thing-cd-album-pZZa1-1898590895.html
+ taj Mahal - Real Thing - CD Album Grooves Inc.
+ Buy Real Thing CD Album from Taj Mahal for $19.57 and pay no postage. More than 800000 CDs and DVDs for 20 years at your service
+]
+
+Relevant (Y/N)? Y
+Result 10
+[
+ http://www.amazon.com/Taj-Mahal/dp/B00004XSUW
+ Taj Mahal - Taj Mahal - Amazon.com Music
+ Amazon.com. Taj Mahal's been chasing the blues around the world for years, but rarely with the passion, energy, and clarity he brought to his first three albums.
+]
+
+Relevant (Y/N)? Y
+======================
+FEEDBACK SUMMARY
+Query albums taj mahal
+Precision 0.9
+Search engine reached desired precision level. Yay.
+

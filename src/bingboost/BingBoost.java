@@ -37,13 +37,15 @@ public class BingBoost {
 	 */
 	private Set<String> readStopwords() throws FileNotFoundException, IOException {
 		Set<String> set = new HashSet<String>();
-
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(BingBoost.class.getResourceAsStream("stopwords.txt")))) {
+		BufferedReader br = new BufferedReader(new InputStreamReader(BingBoost.class.getResourceAsStream("stopwords.txt")));
+		try {
 			String line;
 			while ((line = br.readLine()) != null) {
 				if (line.length() > 0 && line.charAt(0) != '#')
 					set.add(line);
 			}
+		} finally {
+			if(br!=null) br.close();
 		}
 
 		return set;

@@ -66,8 +66,9 @@ public class Interaction {
 				int relevant = Utils.relevanceValueForString(in.nextLine());
 				results[i] = new Result(json.getString("Title"), json.getString("Description"), relevant);
 			}
-		} catch (IOException | JSONException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			if (e instanceof IOException | e instanceof JSONException)
+				e.printStackTrace();
 		}
 		
 		System.out.println("======================");
